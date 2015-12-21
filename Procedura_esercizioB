@@ -1,0 +1,118 @@
+/*
+	1 - SCOPO
+	2 - SPECIFICHE
+	3 - LISTA PARAMETRI
+	4 - INDICATORE DI ERRORE
+	5 - PROCEDURE AUSILIARIE
+	6 - RACCOMANDAZIONI DI USO
+	7 - ESEMPIO DI USO
+*/
+
+
+/*Librerie*/
+#include<stdio.h>
+
+/*Function & Procedure*/
+
+
+
+
+/*inizio*/
+void prova_intercorso(int *X,int y)
+{
+
+	/*VAR*/
+	int B[20];		// Array di interi che conterrà il numero di occorrenze degli elementi di A 
+				// E stato allocato staticamente in quanto non sò come fare per allocarlo dinamicamente dovrei conoscere anticipatamente il numero
+				// esatto di valori da inserire
+
+	int k,i,j;		// Indici
+	float mediana;		// Valore della mediana nel caso in cui n è pari
+	int tot;		// Totale occorrenze
+
+//BEGIN
+
+
+	// Controlliamo se la grandezza dell array è pari o dispari
+	// Dispari
+	if( (y % 2) != 0)
+	{
+		k=((y/2));
+		printf("Indice %d\n",k);
+		printf("Il valore della mediana nel caso di n dispari è %d \n",X[k]);
+	}
+	else	// Pari
+	{
+		i=((y/2)-1);
+		j=((y/2));
+
+		printf("Indice i:%d	Indice j:%d \n",i,j);
+		mediana=( (X[i] + X[j]) / 2 );
+
+		printf("Il valore della mediana nel caso di n pari è %.2f \n",mediana);
+	}
+
+
+
+
+	// Dopo aver calcolato la mediana ho pensato di eliminare i doppi dall array A riscrivendo i valori giusti in B
+
+	
+	B[0]=X[0];			// Copiamo il primo elemento di A in primo di B
+	j=1;				// Indice per l'array B che parte dal secondo elemento di B avendo gia copiato il primo
+	
+	for(i=1;i<y;i++)		// Ciclo che scorre l'array A dal secondo elemento in poi
+	{
+		if( X[i] != X[i-1] )	// Se l'elemento corrente di A è diverso dal suo precedente
+		{
+			B[j]=X[i];	// Copiamo tale elemento nell array B
+			j++;		// Incrementiamo contatore
+		}
+	}
+
+
+
+	// Alla fine dell for otteniamo l'array B senza ripetizioni
+	// Stampiamo array B
+	printf("Array B senza ripetizoni \n");
+	for(i=0;i<j;i++)				// Ciclo che va da 0 a j perchè j contiene il numero esatto di elementi di B
+	{
+		printf("%d\t",B[i]);
+	}
+	printf("\n");
+
+
+
+	// Ora andiamo a modificare l'array B scrivendo le occorenze dei suoi valori in A
+	
+
+	i=0;						// Contatore per aggiornamento valori in B					
+	while(i<j)					// Mentre ci sono ancora elementi da confrontare in B
+	{
+		tot=0;					// Totale occorenze
+		k=0;					// Indice per scorrere l'array A
+		while( ( k < y) && (X[k] <= B[i]) )	// Mentre ci sono elementi da scorrere AND L'elemento di A <= B in modo tale che interrompo il ciclo senza
+		{					// andare a confrontare i restanti dato che l'array A è in ordine
+			if(B[i] == X[k])		// Se sono uguali 
+			{
+				tot=tot+1;		// Aggiorno il totale
+			}
+
+			k++;				// Incremento l'indice di scorrimento dell array A
+		}
+
+		B[i]=tot;				// Inserisco in B il totale
+		i++;					// Incremento contatore di B
+	}
+
+
+	// Stampiamo di nuovo l'array B stavolta con le occorrenze
+	printf("Array B con le occorrenze \n");
+	for(i=0;i<j;i++)				
+	{
+		printf("%d\t",B[i]);
+	}
+	printf("\n");
+
+
+}/*fine*/
