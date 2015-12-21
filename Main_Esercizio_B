@@ -1,0 +1,62 @@
+/*
+	Algoritmo chiamante per la procedura prova_intercorso che :
+	- Calcola la mediana di un array di dimensione n sia pari che dispari
+	- Crei un array 1D che contenga il numero di ripetizioni degli elementi dell array di partenza
+*/
+
+
+//Librerie
+#include<stdio.h>
+#include<stdlib.h>	// Libreria per le funzioni di allocazione dinamica
+
+//Function & Procedure
+void prova_intercorso(int *X,int y);		//int *X array allocato dinamicamente; int y grandezza effettiva
+
+
+
+//inizio
+int main()
+{
+
+	//VAR
+	int *A;				// Puntatore ad area di memoria allocata dinamicamente che contiene l'array	
+	int n;				// Grandezza effettiva array
+	int i;				// Indice
+
+
+//BEGIN
+
+	// Chiediamo grandezza effettiva array
+	printf("Inserisci grandezza effettiva array \n");
+	scanf("%d",&n);
+
+	// Allocazione dinamica array
+	A=(int*)malloc(n*sizeof(int));
+
+
+	// Carichiamo valori all interno dell array
+	printf("Inserisci valori all interno dell array \n\n");
+	for(i=0;i<n;i++)	
+	{
+		printf("%d\t: ",i);
+		scanf("%d",&A[i]);
+		printf("\n");
+	}
+
+	
+	// Stampiamo array inserito
+	printf("L'array inserito è \n");
+	for(i=0;i<n;i++)
+	{
+		printf("%d\t",A[i]);
+	}
+	printf("\n");
+
+	// Richiamo procedura prova intercorso
+	prova_intercorso(A,n);
+
+
+	// Liberiamo memoria
+	free(A);
+return 0;
+}//fine
